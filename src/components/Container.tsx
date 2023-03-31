@@ -130,12 +130,14 @@ const Container = () => {
           {debouncedSearch === "" &&
             Object.keys(fullData).map((item: string) => (
               <DisplayCard
+                pokemonId={fullData[item].id}
                 pokemonName={item}
                 imageSrc={fullData[item].sprites.front_default}
               />
             ))}
           {debouncedSearch !== "" && (
             <DisplayCard
+              pokemonId={data?.id}
               pokemonName={debouncedSearch}
               imageSrc={data?.sprites.front_default}
             />
