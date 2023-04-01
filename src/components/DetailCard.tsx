@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 
 const DetailCard = () => {
   const { id } = useParams();
-  const { isLoading, data } = useQuery([id], () => {
+  const { isLoading, data } = useQuery([`pokemon_${id}`], () => {
     return fetch(`${import.meta.env.VITE_API_URL}${id}`).then((res) =>
       res.json()
     );

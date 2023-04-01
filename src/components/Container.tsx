@@ -20,7 +20,7 @@ const Container = () => {
     startPokemon + 4,
   ];
 
-  const { isLoading, data } = useQuery(["pokemon", debouncedSearch], () => {
+  const { isLoading, data } = useQuery([debouncedSearch], () => {
     if (debouncedSearch !== "") {
       return fetch(`${import.meta.env.VITE_API_URL}${debouncedSearch}/`).then(
         (res) => res.json()
@@ -28,25 +28,33 @@ const Container = () => {
     }
   });
 
-  const firstPokemon = useQuery(["pokemonData1", pokemonIds[0]], () => {
-    if (pokemonIds[0] < 120) {
-      return fetch(`${import.meta.env.VITE_API_URL}${pokemonIds[0]}`).then(
-        (res) => res.json()
-      );
-    }
-  });
+  const firstPokemon = useQuery(
+    [`pokemon_${pokemonIds[0]}`],
+    () => {
+      if (pokemonIds[0] < 120) {
+        return fetch(`${import.meta.env.VITE_API_URL}${pokemonIds[0]}`).then(
+          (res) => res.json()
+        );
+      }
+    },
+    { staleTime: 5 * 60 * 1000 }
+  );
 
   if (firstPokemon?.data?.name !== undefined) {
     fullData = { ...fullData, [firstPokemon?.data?.name]: firstPokemon?.data };
   }
 
-  const secondPokemon = useQuery(["pokemonData2", pokemonIds[1]], () => {
-    if (pokemonIds[1] < 120) {
-      return fetch(`${import.meta.env.VITE_API_URL}${pokemonIds[1]}`).then(
-        (res) => res.json()
-      );
-    }
-  });
+  const secondPokemon = useQuery(
+    [`pokemon_${pokemonIds[1]}`],
+    () => {
+      if (pokemonIds[1] < 120) {
+        return fetch(`${import.meta.env.VITE_API_URL}${pokemonIds[1]}`).then(
+          (res) => res.json()
+        );
+      }
+    },
+    { staleTime: 5 * 60 * 1000 }
+  );
 
   const secondPokemonName = secondPokemon?.data?.name;
   const secondPokemonData = secondPokemon?.data;
@@ -55,13 +63,17 @@ const Container = () => {
     fullData = { ...fullData, [secondPokemonName]: secondPokemonData };
   }
 
-  const thirdPokemon = useQuery(["pokemonData3", pokemonIds[2]], () => {
-    if (pokemonIds[2] < 120) {
-      return fetch(`${import.meta.env.VITE_API_URL}${pokemonIds[2]}`).then(
-        (res) => res.json()
-      );
-    }
-  });
+  const thirdPokemon = useQuery(
+    [`pokemon_${pokemonIds[2]}`],
+    () => {
+      if (pokemonIds[2] < 120) {
+        return fetch(`${import.meta.env.VITE_API_URL}${pokemonIds[2]}`).then(
+          (res) => res.json()
+        );
+      }
+    },
+    { staleTime: 5 * 60 * 1000 }
+  );
 
   const thirdPokemonName = thirdPokemon?.data?.name;
   const thirdPokemonData = thirdPokemon?.data;
@@ -70,13 +82,17 @@ const Container = () => {
     fullData = { ...fullData, [thirdPokemonName]: thirdPokemonData };
   }
 
-  const fourthPokemon = useQuery(["pokemonData4", pokemonIds[3]], () => {
-    if (pokemonIds[3] < 120) {
-      return fetch(`${import.meta.env.VITE_API_URL}${pokemonIds[3]}`).then(
-        (res) => res.json()
-      );
-    }
-  });
+  const fourthPokemon = useQuery(
+    [`pokemon_${pokemonIds[3]}`],
+    () => {
+      if (pokemonIds[3] < 120) {
+        return fetch(`${import.meta.env.VITE_API_URL}${pokemonIds[3]}`).then(
+          (res) => res.json()
+        );
+      }
+    },
+    { staleTime: 5 * 60 * 1000 }
+  );
 
   const fourthPokemonName = fourthPokemon?.data?.name;
   const fourthPokemonData = fourthPokemon?.data;
@@ -85,13 +101,17 @@ const Container = () => {
     fullData = { ...fullData, [fourthPokemonName]: fourthPokemonData };
   }
 
-  const fifthPokemon = useQuery(["pokemonData5", pokemonIds[4]], () => {
-    if (pokemonIds[4] < 120) {
-      return fetch(`${import.meta.env.VITE_API_URL}${pokemonIds[4]}`).then(
-        (res) => res.json()
-      );
-    }
-  });
+  const fifthPokemon = useQuery(
+    [`pokemon_${pokemonIds[4]}`],
+    () => {
+      if (pokemonIds[4] < 120) {
+        return fetch(`${import.meta.env.VITE_API_URL}${pokemonIds[4]}`).then(
+          (res) => res.json()
+        );
+      }
+    },
+    { staleTime: 5 * 60 * 1000 }
+  );
 
   const fifthPokemonName = fifthPokemon?.data?.name;
   const fifthPokemonData = fifthPokemon?.data;
